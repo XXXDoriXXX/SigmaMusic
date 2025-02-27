@@ -63,3 +63,78 @@ function nextSlide() {
     slideIndex = (slideIndex + 1) % slides.length;
     showSlide(slideIndex);
 }
+function playTrack(trackSrc, trackName) {
+    let player = document.getElementById("audio-player");
+    let title = document.getElementById("track-title");
+
+    player.src = `../audio/${trackSrc}`;
+    player.play();
+
+    title.innerText = "🎧 " + trackName;
+}
+const tracks = [
+    { src: "../audio/track1.mp3", title: "Трек 1 - Енергія", image: "../images/music1.jpg" },
+    { src: "../audio/track2.mp3", title: "Трек 2 - Глибокі емоції", image: "../images/music2.jpg" },
+    { src: "../audio/track3.mp3", title: "Трек 3 - Космічні вібрації", image: "../images/music3.jpg" }
+];
+
+let currentTrack = 0;
+let isPlaying = false;
+
+function openPlayer(index) {
+    currentTrack = index;
+    let modal = document.getElementById("music-modal");
+    let player = document.getElementById("audio-player");
+    let title = document.getElementById("track-title");
+    let trackImage = document.getElementById("track-image");
+
+    player.src = tracks[currentTrack].src;
+    title.innerText = tracks[currentTrack].title;
+    trackImage.src = tracks[currentTrack].image;
+
+    modal.classList.add("show");
+    modal.style.display = "flex";
+
+    player.play();
+    isPlaying = true;
+}
+
+function closePlayer() {
+    let modal = document.getElementById("music-modal");
+    modal.classList.remove("show");
+    modal.style.display = "none";
+}
+
+
+
+function togglePlay() {
+    let player = document.getElementById("audio-player");
+    if (isPlaying) {
+        player.pause();
+    } else {
+        player.play();
+    }
+    isPlaying = !isPlaying;
+}
+
+function nextTrack() {
+    currentTrack = (currentTrack + 1) % tracks.length;
+    openPlayer(currentTrack);
+}
+
+function prevTrack() {
+    currentTrack = (currentTrack - 1 + tracks.length) % tracks.length;
+    openPlayer(currentTrack);
+}
+
+function updateProgressBar() {
+    let player = document.getElementById("audio-player");
+    let progressBar = document.getElementById("progress-bar");
+    progressBar.value = (player.currentTime / player.duration) * 100;
+}
+
+function changeTrackTime() {
+    let player = document.getElementById("audio-player");
+    let progressBar = document.getElementById("progress-bar");
+    player.currentTime = (progressBar.value / 100) * player.duration;
+}
