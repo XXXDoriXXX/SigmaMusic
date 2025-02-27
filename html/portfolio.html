@@ -1,10 +1,72 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="uk">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Музика | Музичний Всесвіт</title>
+    <link rel="stylesheet" href="../css/styles.css">
 </head>
 <body>
+<header id="navbar"></header>
+<main class="blurred-container">
+    <h1>🎶 Слухай улюблену музику</h1>
 
+    <!-- Поле пошуку -->
+    <input type="text" id="search-input" placeholder="🔍 Пошук за назвою..." onkeyup="searchTracks()">
+
+    <!-- Категорії жанрів -->
+    <div class="genres-container">
+        <button class="genre-btn" onclick="filterGenre('all')">Всі</button>
+        <button class="genre-btn" onclick="filterGenre('rock')">Рок</button>
+        <button class="genre-btn" onclick="filterGenre('pop')">Поп</button>
+        <button class="genre-btn" onclick="filterGenre('electronic')">Електронна</button>
+    </div>
+
+    <!-- Список треків -->
+    <div class="gallery">
+        <div class="track-item rock" onclick="openPlayer(0)">
+            <img src="../images/music1.jpg" alt="Трек 1">
+            <div class="track-info">
+                <h3>Трек 1 - Енергія</h3>
+                <button class="play-btn">▶️ Грати</button>
+            </div>
+        </div>
+        <div class="track-item pop" onclick="openPlayer(1)">
+            <img src="../images/music2.jpg" alt="Трек 2">
+            <div class="track-info">
+                <h3>Трек 2 - Глибокі емоції</h3>
+                <button class="play-btn">▶️ Грати</button>
+            </div>
+        </div>
+        <div class="track-item electronic" onclick="openPlayer(2)">
+            <img src="../images/music3.jpg" alt="Трек 3">
+            <div class="track-info">
+                <h3>Трек 3 - Космічні вібрації</h3>
+                <button class="play-btn">▶️ Грати</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Модальне вікно -->
+    <div id="music-modal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closePlayer()">&times;</span>
+            <h2 id="track-title">🎵 Назва треку</h2>
+            <div class="track-background"></div>
+            <img id="track-image" src="" alt="Обкладинка треку">
+            <audio id="audio-player" ontimeupdate="updateProgressBar()"></audio>
+            <input type="range" id="progress-bar" value="0" min="0" max="100" step="1" onchange="changeTrackTime()">
+            <div class="player-controls">
+                <button class="control-btn" onclick="prevTrack()">⏮</button>
+                <button class="control-btn" onclick="togglePlay()">▶️</button>
+                <button class="control-btn" onclick="nextTrack()">⏭</button>
+            </div>
+        </div>
+    </div>
+</main>
+
+<div id="footer"></div>
+
+<script src="../js/script.js" defer></script>
 </body>
 </html>
