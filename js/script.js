@@ -96,3 +96,33 @@ function changeTrackTime() {
     let progressBar = document.getElementById("progress-bar");
     player.currentTime = (progressBar.value / 100) * player.duration;
 }
+
+function toggleMenu() {
+    const menu = document.getElementById("nav-links");
+    const menuToggle = document.querySelector(".menu-toggle");
+
+    if (menu.classList.contains("show")) {
+        menu.style.opacity = "0";
+        menu.style.transform = "translateY(-20px)";
+        setTimeout(() => {
+            menu.classList.remove("show");
+        }, 400);
+    } else {
+        menu.classList.add("show");
+        menu.style.opacity = "1";
+        menu.style.transform = "translateY(0)";
+    }
+}
+
+document.addEventListener("click", function (event) {
+    const menu = document.getElementById("nav-links");
+    const menuToggle = document.querySelector(".menu-toggle");
+
+    if (!menu.contains(event.target) && !menuToggle.contains(event.target)) {
+        menu.style.opacity = "0";
+        menu.style.transform = "translateY(-20px)";
+        setTimeout(() => {
+            menu.classList.remove("show");
+        }, 400);
+    }
+});
