@@ -1,10 +1,11 @@
+
+const isMobile = window.innerWidth <= 768;
 document.addEventListener("DOMContentLoaded", function () {
 
     loadComponent("navbar", "../html/components/navbar.html");
     loadComponent("footer", "../html/components/footer.html");
     console.log("Сайт завантажено!");
     const header = document.querySelector("header");
-    showSlide(slideIndex);
     const hiddenElements = document.querySelectorAll('.hidden');
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
@@ -15,14 +16,16 @@ document.addEventListener("DOMContentLoaded", function () {
     }, { threshold: 0.3 });
 
     hiddenElements.forEach(el => observer.observe(el));
+    if (!isMobile) {
     window.addEventListener("scroll", function () {
         if (window.scrollY > 50) {
             header.classList.add("scrolled");
         } else {
             header.classList.remove("scrolled");
         }
-    });
+    });}
 });
+
 function loadComponent(containerId, filePath) {
     fetch(filePath)
         .then(response => response.text())
@@ -30,47 +33,6 @@ function loadComponent(containerId, filePath) {
             document.getElementById(containerId).innerHTML = data;
         })
         .catch(error => console.error(`Помилка завантаження ${filePath}:`, error));
-}
-function openModal(imgElement) {
-    let modal = document.getElementById("modal");
-    let modalImg = document.getElementById("modal-img");
-    let captionText = document.getElementById("caption");
-
-    modal.style.display = "block";
-    modalImg.src = imgElement.src;
-    captionText.innerHTML = imgElement.alt;
-}
-
-function closeModal() {
-    document.getElementById("modal").style.display = "none";
-}
-
-let slideIndex = 0;
-let slides = document.querySelectorAll(".slide");
-
-function showSlide(index) {
-    slides.forEach((slide, i) => {
-        slide.style.transform = `translateX(${(i - index) * 100}%)`;
-    });
-}
-
-function prevSlide() {
-    slideIndex = (slideIndex - 1 + slides.length) % slides.length;
-    showSlide(slideIndex);
-}
-
-function nextSlide() {
-    slideIndex = (slideIndex + 1) % slides.length;
-    showSlide(slideIndex);
-}
-function playTrack(trackSrc, trackName) {
-    let player = document.getElementById("audio-player");
-    let title = document.getElementById("track-title");
-
-    player.src = `../audio/${trackSrc}`;
-    player.play();
-
-    title.innerText = "🎧 " + trackName;
 }
 const tracks = [
     { src: "../audio/track1.mp3", title: "Трек 1 - Енергія", image: "../images/music1.jpg" },
@@ -97,12 +59,18 @@ function openPlayer(index) {
 
     player.play();
     isPlaying = true;
+    setTimeout(() => {
+        modal.classList.add("show");
+    }, 10);
 }
 
 function closePlayer() {
     let modal = document.getElementById("music-modal");
     modal.classList.remove("show");
     modal.style.display = "none";
+    setTimeout(() => {
+        modal.style.display = "none";
+    }, 300);
 }
 
 
@@ -138,3 +106,36 @@ function changeTrackTime() {
     let progressBar = document.getElementById("progress-bar");
     player.currentTime = (progressBar.value / 100) * player.duration;
 }
+
+function toggleMenu() {
+    const menu = document.getElementById("nav-links");
+    const menuToggle = document.querySelector(".menu-toggle");
+
+    if (menu.classList.contains("show")) {
+        menu.style.opacity = "0";
+        menu.style.transform = "translateY(-20px)";
+        setTimeout(() => {
+            menu.classList.remove("show");
+        }, 400);
+    } else {
+        menu.classList.add("show");
+        menu.style.opacity = "1";
+        menu.style.transform = "translateY(0)";
+    }
+}
+
+document.addEventListener("click", function (event) {
+    const menu = document.getElementById("nav-links");
+    const menuToggle = document.querySelector(".menu-toggle");
+
+
+    if (isMobile && menu.classList.contains("show")) {
+        if (!menu.contains(event.target) && !menuToggle.contains(event.target)) {
+            menu.style.opacity = "0";
+            menu.style.transform = "translateY(-20px)";
+            setTimeout(() => {
+                menu.classList.remove("show");
+            }, 400);
+        }
+    }
+});
