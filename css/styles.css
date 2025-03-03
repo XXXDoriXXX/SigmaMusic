@@ -333,6 +333,7 @@ header {
     top: 10px;
     right: 20px;
     font-size: 30px;
+    z-index: 3;
     color: white;
     cursor: pointer;
 }
@@ -403,8 +404,8 @@ header {
 }
 
 .modal-content {
-    width: 400px;
-    height: 500px;
+    width: 60%;
+    height: 60%;
     position: relative;
     display: flex;
     flex-direction: column;
@@ -434,12 +435,12 @@ header {
 }
 
 #track-image {
-    width: 180px;
-    height: 180px;
+    width: 100%;
+    height: 75%;
     border-radius: 15px;
     box-shadow: 0px 0px 15px rgba(255, 255, 255, 0.8);
     position: relative;
-    z-index: 2;
+    z-index: 1;
     filter: brightness(120%);
 }
 #progress-bar {
@@ -500,7 +501,7 @@ header {
     visibility: visible;
 }
 #search-input {
-    width: 100%;
+    width: 90%;
     padding: 10px;
     font-size: 1.2em;
     margin-bottom: 20px;
