@@ -3,39 +3,78 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Галерея | Музичний Всесвіт</title>
+    <title>Музика | Музичний Всесвіт</title>
     <link rel="stylesheet" href="../css/styles.css">
 </head>
 <body>
 <header id="navbar"></header>
-
 <main class="blurred-container">
-    <h1>🎵 Галерея музики</h1>
-    <p>Перегляньте найкращі моменти музичного світу!</p>
+    <section class="hero">
+    <h1>🎶 Слухай улюблену музику</h1>
+
+    <input type="text" id="search-input" placeholder="🔍 Пошук за назвою...">
+
+    <div class="genres-container">
+        <button class="genre-btn" onclick="filterGenre('all')">Всі</button>
+        <button class="genre-btn" onclick="filterGenre('rock')">Рок</button>
+        <button class="genre-btn" onclick="filterGenre('pop')">Поп</button>
+        <button class="genre-btn" onclick="filterGenre('electronic')">Електронна</button>
+    </div>
 
     <div class="gallery">
-        <img src="../images/music1.jpg" alt="Музика 1" class="gallery-item" onclick="openModal(this)">
-        <img src="../images/music2.jpg" alt="Музика 2" class="gallery-item" onclick="openModal(this)">
-        <img src="../images/music3.jpg" alt="Музика 3" class="gallery-item" onclick="openModal(this)">
-        <img src="../images/music4.jpg" alt="Музика 4" class="gallery-item" onclick="openModal(this)">
-        <img src="../images/music5.jpg" alt="Музика 5" class="gallery-item" onclick="openModal(this)">
-        <img src="../images/music6.jpg" alt="Музика 6" class="gallery-item" onclick="openModal(this)">
+        <div class="track-item rock" onclick="openPlayer(0)">
+            <img src="../images/music1.jpg" alt="Трек 1">
+            <div class="track-info">
+                <h3>Трек 1 - Енергія</h3>
+                <button class="play-btn">▶️ Грати</button>
+            </div>
+        </div>
+        <div class="track-item pop" onclick="openPlayer(1)">
+            <img src="../images/music2.jpg" alt="Трек 2">
+            <div class="track-info">
+                <h3>Трек 2 - Глибокі емоції</h3>
+                <button class="play-btn">▶️ Грати</button>
+            </div>
+        </div>
+        <div class="track-item electronic" onclick="openPlayer(2)">
+            <img src="../images/music3.jpg" alt="Трек 3">
+            <div class="track-info">
+                <h3>Трек 3 - Космічні вібрації</h3>
+                <button class="play-btn">▶️ Грати</button>
+            </div>
+        </div>
+        <div class="track-item electronic" onclick="openPlayer(2)">
+            <img src="../images/music3.jpg" alt="Трек 3">
+            <div class="track-info">
+                <h3>Трек 3 - Космічні вібрації</h3>
+                <button class="play-btn">▶️ Грати</button>
+            </div>
+        </div>
+        <div class="track-item electronic" onclick="openPlayer(2)">
+            <img src="../images/music3.jpg" alt="Трек 3">
+            <div class="track-info">
+                <h3>Трек 3 - Космічні вібрації</h3>
+                <button class="play-btn">▶️ Грати</button>
+            </div>
+        </div>
+
     </div>
 
-    <div id="modal" class="modal">
-        <span class="close" onclick="closeModal()">&times;</span>
-        <img class="modal-content" id="modal-img">
-        <div id="caption"></div>
+    <div id="music-modal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closePlayer()">&times;</span>
+            <img id="track-image" src="" alt="Обкладинка треку">
+            <h2 id="track-title">🎵 Назва треку</h2>
+            <audio id="audio-player" ontimeupdate="updateProgressBar()"></audio>
+            <input type="range" id="progress-bar" value="0" min="0" max="100" step="1" onchange="changeTrackTime()">
+            <div class="player-controls">
+                <button class="control-btn" onclick="prevTrack()">⏮</button>
+                <button class="control-btn" onclick="togglePlay()">▶️</button>
+                <button class="control-btn" onclick="nextTrack()">⏭</button>
+            </div>
+        </div>
     </div>
-
-    <h2>🎶 Вибрані моменти</h2>
-    <div class="slider">
-        <div class="slide"><img src="../images/music1.jpg" alt="Слайд 1"></div>
-        <div class="slide"><img src="../images/music2.jpg" alt="Слайд 2"></div>
-        <div class="slide"><img src="../images/music3.jpg" alt="Слайд 3"></div>
-    </div>
-    <button class="prev" onclick="prevSlide()">❮</button>
-    <button class="next" onclick="nextSlide()">❯</button>
+    </section>
 </main>
 
 <div id="footer"></div>
