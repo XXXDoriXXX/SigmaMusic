@@ -2,8 +2,8 @@
 const isMobile = window.innerWidth <= 768;
 document.addEventListener("DOMContentLoaded", function () {
 
-    loadComponent("navbar", "../html/components/navbar.html");
-    loadComponent("footer", "../html/components/footer.html");
+    loadComponent("navbar", "/navbar.html");
+    loadComponent("footer", "/footer.html");
     console.log("Сайт завантажено!");
     const header = document.querySelector("header");
     const hiddenElements = document.querySelectorAll('.hidden');
