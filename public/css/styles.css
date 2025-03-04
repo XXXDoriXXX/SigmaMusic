@@ -187,24 +187,90 @@ footer {
     border-radius: 10px;
 }
 
-table {
+.table {
     width: 100%;
-
+    max-width: 800px;
+    margin: 20px auto;
     border-collapse: collapse;
-    margin-top: 20px;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
 }
-
-th, td {
-    padding: 10px;
-    border: 1px solid white;
+.table thead {
+    background: linear-gradient(45deg, #1DB954, #5BCF6E);
+    color: white;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+.table th {
+    padding: 12px;
     text-align: center;
+    font-size: 18px;
 }
 
+.table td {
+    padding: 10px;
+    text-align: center;
+    font-size: 16px;
+    color: white;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
 th {
     background: #1DB954;
     color: black;
 }
+.table tbody tr:nth-child(odd) {
+     background: rgba(255, 255, 255, 0.05);
+ }
+.table tbody tr:hover {
+    background: rgba(29, 185, 84, 0.3);
+    transition: background 0.3s ease-in-out;
+}
+@media (max-width: 768px) {
+    .table {
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+        max-width: 100%;
+    }
 
+    .table thead {
+        display: none;
+    }
+
+    .table tbody,
+    .table tr,
+    .table td {
+        display: block;
+        width: 100%;
+        text-align: left;
+    }
+
+    .table tr {
+        margin-bottom: 10px;
+        background: rgba(255, 255, 255, 0.05);
+        padding: 10px;
+        border-radius: 10px;
+        box-shadow: 0 0 5px rgba(255, 255, 255, 0.2);
+    }
+
+    .table td {
+        text-align: right;
+        padding: 10px;
+        position: relative;
+    }
+
+    .table td::before {
+        content: attr(data-label);
+        position: absolute;
+        left: 10px;
+        font-weight: bold;
+        color: #1DB954;
+        text-transform: uppercase;
+    }
+}
 select {
     display: block;
     margin: 10px auto;
@@ -606,6 +672,18 @@ header {
     transform: scale(1.1);
     background: rgba(255, 255, 255, 0.3);
 }
+.video-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.video-container iframe {
+    max-width: 100%;
+    border-radius: 10px;
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.3);
+}
+
 
 @media (max-width: 768px) {
     nav ul {
